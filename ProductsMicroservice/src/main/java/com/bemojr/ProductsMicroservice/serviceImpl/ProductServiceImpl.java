@@ -2,9 +2,9 @@ package com.bemojr.ProductsMicroservice.serviceImpl;
 
 import com.bemojr.ProductsMicroservice.dto.ProductRequest;
 import com.bemojr.ProductsMicroservice.entity.Product;
-import com.bemojr.ProductsMicroservice.event.ProductCreatedEvent;
 import com.bemojr.ProductsMicroservice.repository.ProductRepository;
 import com.bemojr.ProductsMicroservice.service.ProductService;
+import com.bemojr.core.ProductCreatedEvent;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.bemojr.ProductsMicroservice.event;
+package com.bemojr.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
