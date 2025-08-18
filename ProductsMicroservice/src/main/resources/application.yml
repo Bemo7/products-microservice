@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: ProductsMicroservice
+  kafka:
+    bootstrap-servers: 172.25.128.103:9092,172.25.128.103:9094
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+#      retries: 10 # Default is Maximum Integer value. Must set retries to non-zero when using the idempotent producer.
+#      properties:
+#        retry:
+#          backoff:
+#            ms: 1000
+      properties:
+        delivery:
+          timeout:
+            ms: 15000
+        linger: 0 # How long a producer waits before sending messages to the broker. Buffers incoming messages while waiting.
+        request:
+          timeout:
+            ms: 3000
+        enable:
+          idempotence: true # "true" by default. But recommended to explicitly set to "true"
+        max:
+          in:
+            flight:
+              requests:
+                per:
+                  connection: 5 # Must be set to at most 5 to use the idempotent producer.
