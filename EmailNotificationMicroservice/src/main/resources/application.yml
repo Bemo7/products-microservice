@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: EmailNotificationMicroservice
+  kafka:
+    consumer:
+      bootstrap-servers: 172.25.128.103:9092, 172.25.128.103:9094
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: product-created-events
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: *
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: false
+            required: false
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    host: localhost
+    port: 1025
+
+server:
+  port: 0
