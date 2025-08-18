@@ -1,5 +1,6 @@
 package com.bemojr.emailnotification.handler;
 
+import com.bemojr.core.ProductCreatedEvent;
 import org.slf4j.*;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -12,6 +13,6 @@ public class ProductCreatedEventHandler {
 
     @KafkaHandler
     public void handle(ProductCreatedEvent productCreatedEvent) {
-        LOGGER.info("Received a new event: " + productCreatedEvent.getTitle());
+        LOGGER.info("Received a new event: " + productCreatedEvent.getProductName());
     }
 }

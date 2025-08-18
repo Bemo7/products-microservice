@@ -1,6 +1,6 @@
 package com.bemojr.ProductsMicroservice.configuration;
 
-import com.bemojr.ProductsMicroservice.event.ProductCreatedEvent;
+import com.bemojr.core.ProductCreatedEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Value;
