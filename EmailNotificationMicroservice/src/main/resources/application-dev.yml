@@ -1,0 +1,17 @@
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: false
+            required: false
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    host: localhost
+    port: 1025
+
+server:
+  port: 0

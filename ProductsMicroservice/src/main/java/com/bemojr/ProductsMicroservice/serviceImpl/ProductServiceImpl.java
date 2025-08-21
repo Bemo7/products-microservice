@@ -9,6 +9,7 @@ import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.header.Headers;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -54,9 +55,15 @@ public class ProductServiceImpl implements ProductService {
                 .currency(product.getCurrency())
                 .build();
 
-        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send("topic2", productCreatedEvent).get();
+        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send(productCreatedEventTopic, productCreatedEvent).get();
 
         RecordMetadata recordMetadata = result.getRecordMetadata();
+
+        Headers headers = result.getProducerRecord().headers();
+
+        headers.forEach(
+                header -> {log.info("********* Header : {} => {}", header.key(), header.value());}
+        );
 
         log.info("********* Topic: {}", recordMetadata.topic());
         log.info("********* Partition: {}", recordMetadata.partition());

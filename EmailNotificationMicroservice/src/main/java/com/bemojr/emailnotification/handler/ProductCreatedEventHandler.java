@@ -1,6 +1,7 @@
 package com.bemojr.emailnotification.handler;
 
 import com.bemojr.core.ProductCreatedEvent;
+import com.bemojr.emailnotification.exception.NotRetryableException;
 import org.slf4j.*;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Component;
 public class ProductCreatedEventHandler {
     private final Logger LOGGER = LoggerFactory.getLogger(ProductCreatedEventHandler.class);
 
-    @KafkaHandler
+    @KafkaHandler()
     public void handle(ProductCreatedEvent productCreatedEvent) {
-        LOGGER.info("Received a new event: " + productCreatedEvent.getProductName());
+//        if (true) throw new NotRetryableException("An error has occurred");
+        LOGGER.info("Received a new event: {}", productCreatedEvent.getProductName());
     }
 }
