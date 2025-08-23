@@ -6,4 +6,4 @@
  */
 
 rootProject.name = 'bemojr-kafka-microservices'
-include ("core", "ProductsMicroservice", "EmailNotificationMicroservice")
+include("core", "ProductsMicroservice", "EmailNotificationMicroservice", "MockMicroservice")
