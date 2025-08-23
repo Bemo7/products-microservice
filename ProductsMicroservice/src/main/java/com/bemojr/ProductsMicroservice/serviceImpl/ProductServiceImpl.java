@@ -8,6 +8,7 @@ import com.bemojr.core.ProductCreatedEvent;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.header.Headers;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,8 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -55,15 +58,19 @@ public class ProductServiceImpl implements ProductService {
                 .currency(product.getCurrency())
                 .build();
 
-        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send(productCreatedEventTopic, productCreatedEvent).get();
+        ProducerRecord<String, ProductCreatedEvent> record = new ProducerRecord<>(
+                productCreatedEventTopic,
+                product.getId(),
+                productCreatedEvent
+        );
 
+        record.headers().add("messageId", UUID.randomUUID().toString().getBytes());
+
+        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send(record).get();
         RecordMetadata recordMetadata = result.getRecordMetadata();
 
         Headers headers = result.getProducerRecord().headers();
-
-        headers.forEach(
-                header -> {log.info("********* Header : {} => {}", header.key(), header.value());}
-        );
+        headers.forEach(header -> log.info("********* Header : {} => {}", header.key(), header.value()));
 
         log.info("********* Topic: {}", recordMetadata.topic());
         log.info("********* Partition: {}", recordMetadata.partition());

@@ -6,6 +6,5 @@ spring:
       bootstrap-servers: 172.25.128.103:9092, 172.25.128.103:9094
 #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      group-id: product-created-events
       properties:
         spring.json.trusted.packages: "com.bemojr.core"

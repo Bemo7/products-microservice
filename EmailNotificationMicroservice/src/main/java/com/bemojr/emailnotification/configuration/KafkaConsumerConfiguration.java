@@ -16,7 +16,6 @@ import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import org.springframework.util.backoff.BackOff;
 import org.springframework.util.backoff.FixedBackOff;
 
 import java.util.HashMap;
@@ -33,7 +32,7 @@ public class KafkaConsumerConfiguration {
 //    @Value("${spring.kafka.consumer.value-deserializer}")
 //    private String valueDeserializer;
 
-    @Value("${spring.kafka.consumer.group-id}")
+    @Value("${application.consumer.group-id}")
     private String groupId;
 
     @Bean
