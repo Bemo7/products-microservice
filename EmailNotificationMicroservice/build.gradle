@@ -1,21 +1,7 @@
 description = 'Email Notification Microservice'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
-
-repositories {
-	mavenCentral()
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation project(':core')
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
 }
