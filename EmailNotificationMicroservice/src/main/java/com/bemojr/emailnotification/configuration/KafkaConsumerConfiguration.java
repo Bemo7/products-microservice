@@ -26,14 +26,11 @@ public class KafkaConsumerConfiguration {
     @Value("${spring.kafka.consumer.bootstrap-servers}")
     private String bootstrapServers;
 
-//    @Value("${spring.kafka.consumer.key-deserializer}")
-//    private String keyDeserializer;
-//
-//    @Value("${spring.kafka.consumer.value-deserializer}")
-//    private String valueDeserializer;
-
-    @Value("${application.consumer.group-id}")
+    @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
+
+    @Value("${spring.kafka.consumer.auto-offset-reset}")
+    private String autoOffsetReset;
 
     @Bean
     ConsumerFactory<String, Object> consumerFactory() {
@@ -45,6 +42,7 @@ public class KafkaConsumerConfiguration {
         configs.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
         configs.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         configs.put(JsonDeserializer.TRUSTED_PACKAGES, "com.bemojr.core");
+        configs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetReset);
 
         return new DefaultKafkaConsumerFactory<>(configs);
     }

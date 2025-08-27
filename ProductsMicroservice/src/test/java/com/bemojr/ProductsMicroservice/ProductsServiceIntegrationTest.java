@@ -51,14 +51,11 @@ public class ProductsServiceIntegrationTest {
 
     @BeforeAll
     void setUp() {
-        // Add topic(s) to embedded kafka broker
-        embeddedKafkaBroker.addTopics(environment.getProperty("application.topic.product-created-event-topic"));
-
         // Create Kafka Consumer Factory
         DefaultKafkaConsumerFactory<String, Object> consumerFactory = new DefaultKafkaConsumerFactory<>(getConsumerProperties());
 
         // Create / Instantiate Container Properties
-        ContainerProperties containerProperties = new ContainerProperties(environment.getProperty("application.topic.product-created-event-topic"));
+        ContainerProperties containerProperties = new ContainerProperties(environment.getProperty("application.kafka.topic-name"));
 
         // Create / Instantiate Message Listener Container
         container = new KafkaMessageListenerContainer<>(consumerFactory, containerProperties);

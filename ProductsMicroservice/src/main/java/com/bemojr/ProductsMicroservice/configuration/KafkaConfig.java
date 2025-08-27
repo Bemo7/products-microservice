@@ -15,10 +15,10 @@ import org.springframework.kafka.core.ProducerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-@Profile("!test")
+//@Profile("!test")
 @Configuration
 public class KafkaConfig {
-    @Value("${application.topic.product-created-event-topic}")
+    @Value("${application.kafka.topic-name}")
     private String productCreatedEventTopic;
 
     @Value("${spring.kafka.bootstrap-servers}")

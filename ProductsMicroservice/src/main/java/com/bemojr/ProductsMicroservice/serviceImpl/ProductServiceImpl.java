@@ -26,7 +26,7 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
-    @Value("${application.topic.product-created-event-topic}")
+    @Value("${application.kafka.topic-name}")
     private String productCreatedEventTopic;
 
     private final ProductRepository productRepository;

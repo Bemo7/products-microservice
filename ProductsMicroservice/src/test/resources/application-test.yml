@@ -39,5 +39,5 @@ server:
   port: 0
 
 application:
-  topic:
-    product-created-event-topic: product-created-event
+  kafka:
+    topic-name: product-created-event

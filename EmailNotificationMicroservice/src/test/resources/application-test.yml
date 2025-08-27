@@ -1,0 +1,3 @@
+application:
+  kafka:
+    topic-name: product-created-events-topic
