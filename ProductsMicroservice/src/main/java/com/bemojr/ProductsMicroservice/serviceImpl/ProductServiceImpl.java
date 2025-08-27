@@ -36,9 +36,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public String createProduct(ProductRequest productRequest) throws ExecutionException, InterruptedException {
         productRepository.findByTitle(productRequest.title()).ifPresent(
-                product -> {
-                    throw new EntityExistsException("Product " + productRequest.title() +  " already exists!");
-                }
+                product -> {throw new EntityExistsException("Product " + productRequest.title() +  " already exists!");}
         );
 
         Product product = Product.builder()

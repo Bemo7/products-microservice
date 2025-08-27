@@ -1,4 +1,9 @@
 spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      group-id: product-created-event
+
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
@@ -34,5 +39,5 @@ server:
   port: 0
 
 application:
-  consumer:
-    group-id: product-created-events
+  topic:
+    product-created-event-topic: product-created-event
